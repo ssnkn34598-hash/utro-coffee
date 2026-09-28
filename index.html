@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кофейня «Утро» — Светлогорск, ул. Садовая, 12</title>
+  <meta name="description" content="Кофейня «Утро» в Светлогорске: свежий кофе, круассаны, сырники и чизкейк. Второй капучино в подарок до 10:00. ул. Садовая, 12.">
+  <meta name="theme-color" content="#6b4a35">
+
+  <!-- Open Graph: как ссылка выглядит в мессенджерах -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Кофейня «Утро» в Светлогорске">
+  <meta property="og:description" content="Свежий кофе и выпечка на Садовой, 12. Второй капучино в подарок до 10:00.">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Данные для поисковиков (Яндекс, Google): кофейня, адрес, часы работы -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Утро",
+    "description": "Уютная кофейня в Светлогорске",
+    "servesCuisine": "Кофе, выпечка, десерты",
+    "priceRange": "150–290 ₽",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Садовая, 12",
+      "addressLocality": "Светлогорск",
+      "addressCountry": "RU"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:30", "closes": "20:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "21:00" }
+    ],
+    "sameAs": ["https://t.me/utro_coffee", "https://www.instagram.com/utro.coffee/"]
+  }
+  </script>
+
+  <style>
+    /* ===== Палитра и базовые настройки ===== */
+    :root {
+      --cream: #fbf5ec;       /* фон страницы */
+      --milk: #f3e7d6;        /* светлые плашки */
+      --beige: #e6d2b8;       /* рамки, разделители */
+      --latte: #c9a47e;       /* акценты */
+      --caramel: #a8703f;     /* ссылки, цены */
+      --coffee: #6b4a35;      /* кнопки, заголовки */
+      --espresso: #3b2a20;    /* основной текст */
+      --white: #fffdf9;
+
+      --font-title: "Playfair Display", Georgia, "Times New Roman", serif;
+      --font-body: "Nunito", "Segoe UI", Roboto, Arial, sans-serif;
+
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(59, 42, 32, 0.08);
+      --container: 1080px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--espresso);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--caramel); }
+
+    h1, h2, h3 {
+      font-family: var(--font-title);
+      color: var(--coffee);
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      text-align: center;
+      margin-bottom: 0.4em;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section { padding: 72px 0; }
+
+    .section-lead {
+      text-align: center;
+      max-width: 34em;
+      margin: 0 auto 40px;
+      color: #6f5a4b;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 999px;
+      background: var(--coffee);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(107, 74, 53, 0.25);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { background: var(--espresso); transform: translateY(-2px); }
+    .btn:focus-visible, a:focus-visible { outline: 3px solid var(--latte); outline-offset: 3px; }
+
+    /* ===== Места под фото =====
+       Чтобы поставить фото, замените <div class="photo-slot">…</div>
+       на <img class="photo" src="images/имя-файла.jpg" alt="Описание">. */
+    .photo-slot, .photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+    .photo-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px;
+      text-align: center;
+      color: #9a7b62;
+      font-size: 0.95rem;
+      background:
+        repeating-linear-gradient(45deg, transparent 0 14px, rgba(201, 164, 126, 0.12) 14px 28px),
+        var(--milk);
+      border: 2px dashed var(--beige);
+    }
+    .photo-slot span { font-size: 2rem; line-height: 1; }
+
+    /* ===== Первый экран ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 60px 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(201, 164, 126, 0.35), transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(168, 112, 63, 0.18), transparent 50%),
+        linear-gradient(160deg, var(--cream) 0%, var(--milk) 100%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-text { text-align: center; }
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(5rem, 22vw, 10rem);
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--coffee);
+      text-shadow: 0 6px 24px rgba(107, 74, 53, 0.12);
+    }
+    .hero h1 .dot { color: var(--latte); }
+    .hero-phrase {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+      color: #7a5a44;
+      margin: 18px auto 24px;
+      max-width: 20em;
+    }
+    .hero-address {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      margin: 0 0 28px;
+    }
+
+    /* ===== Акция ===== */
+    .promo { padding: 0; margin-top: -40px; position: relative; z-index: 2; }
+    .promo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 32px 24px;
+      text-align: center;
+      border-radius: 28px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--coffee) 0%, #8a5d3e 100%);
+      box-shadow: 0 18px 40px rgba(107, 74, 53, 0.3);
+    }
+    .promo-badge {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--cream);
+      color: var(--coffee);
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1.9rem;
+      transform: rotate(-8deg);
+    }
+    .promo-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+      line-height: 1.2;
+      color: var(--white);
+      margin: 0 0 6px;
+    }
+    .promo-title mark {
+      background: none;
+      color: #f3d3a8;
+      white-space: nowrap;
+    }
+    .promo-text { margin: 0; opacity: 0.9; }
+
+    /* ===== Меню ===== */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .menu-card h3 {
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .menu-list { list-style: none; margin: 0; padding: 0; }
+    .menu-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 1.1rem;
+    }
+    .menu-list li + li { border-top: 1px solid var(--milk); }
+    .menu-list .name { font-weight: 600; }
+    .menu-list .leader {
+      flex: 1;
+      border-bottom: 2px dotted var(--beige);
+      transform: translateY(-4px);
+    }
+    .menu-list .price {
+      font-weight: 700;
+      color: var(--caramel);
+      white-space: nowrap;
+    }
+    .menu-card .photo-slot, .menu-card .photo { aspect-ratio: 16 / 9; margin-top: auto; }
+
+    /* ===== Адрес и часы ===== */
+    .visit { background: var(--milk); }
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .visit-info {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .visit-info h3 { font-size: 1.35rem; margin-bottom: 6px; }
+    .visit-info p { margin: 0; }
+    .hours { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
+    .hours dt { font-weight: 600; }
+    .hours dd { margin: 0; }
+    .visit-info .btn { align-self: flex-start; }
+    .visit .photo-slot, .visit .photo { height: 100%; min-height: 260px; }
+
+    /* ===== Контакты ===== */
+    .contacts-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--espresso);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-link:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(59, 42, 32, 0.12); }
+    .contact-icon {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--milk);
+      color: var(--coffee);
+    }
+    .contact-icon svg { width: 26px; height: 26px; }
+    .contact-label { display: block; font-size: 0.9rem; color: #8a7160; }
+    .contact-handle { display: block; font-weight: 700; font-size: 1.15rem; color: var(--coffee); }
+
+    /* ===== Подвал ===== */
+    footer {
+      padding: 36px 0;
+      text-align: center;
+      background: var(--espresso);
+      color: var(--beige);
+      font-size: 0.95rem;
+    }
+    footer .logo {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--cream);
+      display: block;
+      margin-bottom: 4px;
+    }
+    footer p { margin: 0; }
+
+    /* ===== Планшеты и больше ===== */
+    @media (min-width: 720px) {
+      body { font-size: 18px; }
+      section { padding: 96px 0; }
+      .promo-card { flex-direction: row; text-align: left; padding: 36px 44px; gap: 32px; }
+      .promo-badge { width: 116px; height: 116px; font-size: 2.2rem; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .menu-card { padding: 36px; }
+      .contacts-list { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== Компьютеры ===== */
+    @media (min-width: 960px) {
+      .hero-inner { grid-template-columns: 1.1fr 0.9fr; gap: 56px; }
+      .hero-text { text-align: left; }
+      .hero-phrase { margin-left: 0; }
+      .visit-grid { grid-template-columns: 1fr 1fr; }
+      .visit-info { padding: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .contact-link { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 1. Первый экран ===== -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="hero-kicker">Кофейня в Светлогорске</span>
+        <h1>Утро<span class="dot">.</span></h1>
+        <p class="hero-phrase">Место, где каждый день начинается с тёплой чашки и доброго слова</p>
+        <p class="hero-address">📍 Светлогорск, ул. Садовая, 12</p>
+        <div>
+          <a class="btn" href="#visit">Как нас найти <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <!-- ФОТО 1: интерьер кофейни. Замените div на <img class="photo" src="images/interior.jpg" alt="Интерьер кофейни «Утро»"> -->
+      <div class="photo-slot" role="img" aria-label="Здесь будет фото интерьера">
+        <span aria-hidden="true">🪑</span>
+        Здесь будет фото интерьера
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== 2. Акция ===== -->
+    <section class="promo" aria-label="Акция">
+      <div class="container">
+        <div class="promo-card">
+          <div class="promo-badge" aria-hidden="true">1+1</div>
+          <div>
+            <p class="promo-title">Второй капучино — в подарок <mark>до 10:00</mark></p>
+            <p class="promo-text">Приходите утром вдвоём: одну чашку вы покупаете, вторую мы угощаем. Каждый день.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. Меню ===== -->
+    <section id="menu">
+      <div class="container">
+        <h2>Меню</h2>
+        <p class="section-lead">Варим кофе на свежей обжарке, а выпечку готовим каждое утро. Всё просто и очень вкусно.</p>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3><span aria-hidden="true">☕</span> Напитки</h3>
+            <ul class="menu-list">
+              <li><span class="name">Эспрессо</span><span class="leader"></span><span class="price">150 ₽</span></li>
+              <li><span class="name">Американо</span><span class="leader"></span><span class="price">180 ₽</span></li>
+              <li><span class="name">Капучино</span><span class="leader"></span><span class="price">220 ₽</span></li>
+              <li><span class="name">Латте</span><span class="leader"></span><span class="price">240 ₽</span></li>
+              <li><span class="name">Раф</span><span class="leader"></span><span class="price">270 ₽</span></li>
+              <li><span class="name">Какао</span><span class="leader"></span><span class="price">200 ₽</span></li>
+            </ul>
+            <!-- ФОТО 2: напитки. Замените div на <img class="photo" src="images/drinks.jpg" alt="Кофейные напитки"> -->
+            <div class="photo-slot" role="img" aria-label="Здесь будет фото напитков">
+              <span aria-hidden="true">☕</span>
+              Здесь будет фото напитков
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <h3><span aria-hidden="true">🥐</span> Выпечка и десерты</h3>
+            <ul class="menu-list">
+              <li><span class="name">Круассан</span><span class="leader"></span><span class="price">150 ₽</span></li>
+              <li><span class="name">Сырники</span><span class="leader"></span><span class="price">290 ₽</span></li>
+              <li><span class="name">Чизкейк</span><span class="leader"></span><span class="price">260 ₽</span></li>
+            </ul>
+            <!-- ФОТО 3: выпечка и десерты. Замените div на <img class="photo" src="images/desserts.jpg" alt="Выпечка и десерты"> -->
+            <div class="photo-slot" role="img" aria-label="Здесь будет фото выпечки">
+              <span aria-hidden="true">🥐</span>
+              Здесь будет фото выпечки
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. Адрес и часы ===== -->
+    <section id="visit" class="visit">
+      <div class="container">
+        <h2>Ждём в гости</h2>
+        <p class="section-lead">Заходите за кофе по дороге на работу или просто посидеть в тишине.</p>
+
+        <div class="visit-grid">
+          <div class="visit-info">
+            <div>
+              <h3>Адрес</h3>
+              <p>Светлогорск, ул. Садовая, 12</p>
+            </div>
+            <div>
+              <h3>Часы работы</h3>
+              <dl class="hours">
+                <dt>Пн–пт</dt><dd>7:30–20:00</dd>
+                <dt>Сб–вс</dt><dd>9:00–21:00</dd>
+              </dl>
+            </div>
+            <a class="btn" href="https://yandex.ru/maps/?text=%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D0%B3%D0%BE%D1%80%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%A1%D0%B0%D0%B4%D0%BE%D0%B2%D0%B0%D1%8F%2C%2012" target="_blank" rel="noopener">
+              Открыть на карте <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <!-- Здесь позже можно разместить виджет Яндекс Карт или ещё одно фото -->
+          <div class="photo-slot" role="img" aria-label="Место для карты или фото входа">
+            <span aria-hidden="true">🗺️</span>
+            Здесь будет карта или фото входа
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. Контакты ===== -->
+    <section id="contacts">
+      <div class="container">
+        <h2>Мы на связи</h2>
+        <p class="section-lead">Пишите нам, подписывайтесь и следите за новинками меню.</p>
+
+        <div class="contacts-list">
+          <a class="contact-link" href="https://t.me/utro_coffee" target="_blank" rel="noopener">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13.2l-4.7-1.5c-1-.3-1-1 .2-1.5L20.5 3c.9-.3 1.6.2 1.4 1.3Z"/></svg>
+            </span>
+            <span>
+              <span class="contact-label">Telegram</span>
+              <span class="contact-handle">@utro_coffee</span>
+            </span>
+          </a>
+
+          <a class="contact-link" href="https://www.instagram.com/utro.coffee/" target="_blank" rel="noopener">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            </span>
+            <span>
+              <span class="contact-label">Instagram</span>
+              <span class="contact-handle">@utro.coffee</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="logo">Утро</span>
+      <p>Кофейня в Светлогорске · ул. Садовая, 12</p>
+    </div>
+  </footer>
+
+</body>
+</html>
